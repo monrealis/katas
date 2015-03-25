@@ -1,9 +1,21 @@
 package roman;
 
 public enum RomanDigit {
-	L, X {
+	M, D, C {
 		@Override
 		public String repeat(int numberOfTimes) {
+			if (numberOfTimes == 9) 
+				return "CM";
+			if (numberOfTimes == 4)
+				return "CD";
+			return super.repeat(numberOfTimes);
+		}
+	}
+	, L, X {
+		@Override
+		public String repeat(int numberOfTimes) {
+			if (numberOfTimes == 9)
+				return "XC";
 			if (numberOfTimes == 4)
 				return "XL";
 			return super.repeat(numberOfTimes);
