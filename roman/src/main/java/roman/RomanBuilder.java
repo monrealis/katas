@@ -20,14 +20,18 @@ public class RomanBuilder {
 	public RomanBuilder build() {
 		fillInitialValues();
 		handleFours();
-		handleFifties();
+		convertFivesToTens();
+		convertTensToFifties();
 		handleFourties();
 		return this;
 	}
 
-	private void handleFifties() {
+	private void convertFivesToTens() {
 		numberOfTens += numberOfFives / 2;
 		numberOfFives -= numberOfFives / 2 * 2;
+	}
+
+	private void convertTensToFifties() {
 		numberOfFifties += numberOfTens / 5;
 		numberOfTens -= numberOfTens / 5 * 5;
 	}
