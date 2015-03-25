@@ -5,7 +5,9 @@ public class Roman {
 
 	public Roman(int number) {
 		if (number < 0)
-			throw new IllegalArgumentException("The number is negative");
+			throw new IllegalArgumentException();
+		if (number > 3000)
+			throw new IllegalArgumentException();
 		this.number = number;
 	}
 

@@ -10,6 +10,11 @@ public class RomanTest {
 		new Roman(-1);
 	}
 
+	@Test(expected = Throwable.class)
+	public void shouldThrowExceptionIfMoreThanThreeThousand() {
+		new Roman(-1);
+	}
+
 	@Test
 	public void shoudReturnRomansUsingOnesAndFives() {
 		assertRoman("", 0);
@@ -19,20 +24,21 @@ public class RomanTest {
 		assertRoman("IV", 4);
 		assertRoman("VIII", 8);
 	}
+
 	@Test
 	public void shoudReturnRomansUsingTens() {
 		assertRoman("IX", 9);
 		assertRoman("X", 10);
 		assertRoman("XV", 15);
 		assertRoman("XVI", 16);
-		assertRoman("XXXVII", 37);		
-	}		
-	
+		assertRoman("XXXVII", 37);
+	}
+
 	@Test
 	public void shoudReturnRomansUsingFifties() {
-		assertRoman("XL", 40);		
+		assertRoman("XL", 40);
 		assertRoman("XLVII", 47);
-		//assertRoman("XLIX", 49);
+		assertRoman("XLIX", 49);
 	}
 
 	private void assertRoman(String expected, int number) {
