@@ -1,14 +1,11 @@
 package roman;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class RomanBuilder {
 	private int n;
-	private int m;
-	private int d;
-	private int c;
-	private int l;
-	private int x;
-	private int v;
-	private int i;
+	private Map<RomanDigit, Integer> counts = new TreeMap<>();
 
 	public RomanBuilder(int n) {
 		this.n = n;
@@ -21,46 +18,33 @@ public class RomanBuilder {
 	}
 
 	private void fillInitialValues() {
-		m = n / 1000;
-		n = n % 1000;
-		d = n / 500;
-		n = n % 500;
-		c = n / 100;
-		n = n % 100;
-		l = n / 50;
-		n = n % 50;
-		x = n / 10;
-		n = n % 10;
-		v = n / 5;
-		n = n % 5;
-		i = n;
+		for (RomanDigit rd : RomanDigit.values()) {
+			counts.put(rd, n / rd.getValue());
+			n = n % rd.getValue();
+		}
+
 	}
 
 	private void handleExceptions() {
-		if (v == 1 && i == 4) {
-			v--;
-			i += 5;
+		if (counts.get(RomanDigit.V) == 1 && counts.get(RomanDigit.I) == 4) {
+			counts.put(RomanDigit.V, 0);
+			counts.put(RomanDigit.I, 9);
 		}
-		if (l == 1 && x == 4) {
-			l--;
-			x += 5;
+		if (counts.get(RomanDigit.L) == 1 && counts.get(RomanDigit.X) == 4) {
+			counts.put(RomanDigit.L, 0);
+			counts.put(RomanDigit.X, 9);
 		}
-		if (d == 1 && c == 4) {
-			d--;
-			c += 5;
+		if (counts.get(RomanDigit.D) == 1 && counts.get(RomanDigit.C) == 4) {
+			counts.put(RomanDigit.D, 0);
+			counts.put(RomanDigit.C, 9);
 		}
 	}
 
 	@Override
 	public String toString() {
 		String r = "";
-		r += RomanDigit.M.repeat(m);
-		r += RomanDigit.D.repeat(d);
-		r += RomanDigit.C.repeat(c);
-		r += RomanDigit.L.repeat(l);
-		r += RomanDigit.X.repeat(x);
-		r += RomanDigit.V.repeat(v);
-		r += RomanDigit.I.repeat(i);
+		for (RomanDigit d : RomanDigit.values())
+			r += d.repeat(counts.get(d));
 		return r;
 	}
 
