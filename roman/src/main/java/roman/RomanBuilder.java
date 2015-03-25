@@ -18,6 +18,21 @@ public class RomanBuilder {
 	}
 
 	public RomanBuilder build() {
+		fillInitialValues();
+		handleFours();
+		handleFifties();
+		handleFourties();
+		return this;
+	}
+
+	private void handleFifties() {
+		numberOfTens += numberOfFives / 2;
+		numberOfFives -= numberOfFives / 2 * 2;
+		numberOfFifties += numberOfTens / 5;
+		numberOfTens -= numberOfTens / 5 * 5;
+	}
+
+	private void fillInitialValues() {
 		numberOfFifties = n / 50;
 		n = n % 50;
 		numberOfTens = n / 10;
@@ -25,23 +40,22 @@ public class RomanBuilder {
 		numberOfFives = n / 5;
 		n = n % 5;
 		numberOfOnes = n;
-		numberOfMinusOnes = 0;
-		numberOfMinusTens = 0;
-		if (numberOfOnes == 4) {
-			numberOfOnes -= 4;
-			numberOfMinusOnes++;
-			numberOfFives++;
-		}
-		numberOfTens += numberOfFives / 2;
-		numberOfFives -= numberOfFives / 2 * 2;
-		numberOfFifties += numberOfTens / 5;
-		numberOfTens -= numberOfTens / 5 * 5;
-		if (numberOfTens == 4) {
-			numberOfTens -= 4;
-			numberOfMinusTens++;
-			numberOfFifties++;
-		}
-		return this;
+	}
+
+	private void handleFours() {
+		if (numberOfOnes != 4)
+			return;
+		numberOfOnes -= 4;
+		numberOfMinusOnes++;
+		numberOfFives++;
+	}
+
+	private void handleFourties() {
+		if (numberOfTens != 4)
+			return;
+		numberOfTens -= 4;
+		numberOfMinusTens++;
+		numberOfFifties++;
 	}
 
 	@Override
