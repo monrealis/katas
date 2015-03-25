@@ -22,21 +22,19 @@ public class RomanBuilder {
 			counts.put(rd, n / rd.getValue());
 			n = n % rd.getValue();
 		}
-
 	}
 
 	private void handleExceptions() {
-		if (counts.get(RomanDigit.V) == 1 && counts.get(RomanDigit.I) == 4) {
-			counts.put(RomanDigit.V, 0);
-			counts.put(RomanDigit.I, 9);
-		}
-		if (counts.get(RomanDigit.L) == 1 && counts.get(RomanDigit.X) == 4) {
-			counts.put(RomanDigit.L, 0);
-			counts.put(RomanDigit.X, 9);
-		}
-		if (counts.get(RomanDigit.D) == 1 && counts.get(RomanDigit.C) == 4) {
-			counts.put(RomanDigit.D, 0);
-			counts.put(RomanDigit.C, 9);
+		replaceOneTimesFivePlusFourToNine(RomanDigit.V, RomanDigit.I);
+		replaceOneTimesFivePlusFourToNine(RomanDigit.L, RomanDigit.X);
+		replaceOneTimesFivePlusFourToNine(RomanDigit.D, RomanDigit.C);
+	}
+
+	private void replaceOneTimesFivePlusFourToNine(RomanDigit five,
+			RomanDigit one) {
+		if (counts.get(five) == 1 && counts.get(one) == 4) {
+			counts.put(five, 0);
+			counts.put(one, 9);
 		}
 	}
 
